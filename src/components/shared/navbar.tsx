@@ -1,4 +1,6 @@
 import { Button } from "../ui/button";
+import Link from "next/link";
+
 const Navbar = function () {
 	return (
 		<nav
@@ -28,45 +30,22 @@ const Navbar = function () {
 					</svg>
 				</span> */}
 				<div className="hidden items-center gap-2 md:flex">
-					<a
-						href="#"
-						className="group relative scale-100 overflow-hidden rounded-lg px-4 py-2 transition-transform hover:scale-105 active:scale-95"
-					>
-						<span className="relative z-10 text-white/90 transition-colors group-hover:text-white">
-							Features
-						</span>
-						<span className="absolute inset-0 z-0 bg-gradient-to-br from-white/20 to-white/5 opacity-0 transition-opacity group-hover:opacity-100"></span>
-					</a>
-					<a
-						href="#"
-						className="group relative scale-100 overflow-hidden rounded-lg px-4 py-2 transition-transform hover:scale-105 active:scale-95"
-					>
-						<span className="relative z-10 text-white/90 transition-colors group-hover:text-white">
-							Blog
-						</span>
-						<span className="absolute inset-0 z-0 bg-gradient-to-br from-white/20 to-white/5 opacity-0 transition-opacity group-hover:opacity-100"></span>
-					</a>
-					<a
-						href="#"
-						className="group relative scale-100 overflow-hidden rounded-lg px-4 py-2 transition-transform hover:scale-105 active:scale-95"
-					>
-						<span className="relative z-10 text-white/90 transition-colors group-hover:text-white">
-							Dashboard
-						</span>
-						<span className="absolute inset-0 z-0 bg-gradient-to-br from-white/20 to-white/5 opacity-0 transition-opacity group-hover:opacity-100"></span>
-					</a>
+					<Button variant="ghost">
+						<Link href="/">Features </Link>
+					</Button>
+					<Button variant="ghost">
+						<Link href="blog">Blog</Link>
+					</Button>
+					<Button variant="ghost">
+						<Link href="/dashboard">Dashboard</Link>
+					</Button>
 				</div>
 				<span className="pointer-events-none relative left-0 top-[50%] z-10 text-4xl font-black text-white mix-blend-overlay md:absolute md:left-[50%] md:-translate-x-[50%] md:-translate-y-[50%]">
 					echo
 				</span>
 				<div className="flex items-center gap-4">
 					<div className="hidden md:block">
-						<button className="group relative scale-100 overflow-hidden rounded-lg px-4 py-2 transition-transform hover:scale-105 active:scale-95">
-							<span className="relative z-10 text-white/90 transition-colors group-hover:text-white">
-								Sign in
-							</span>
-							<span className="absolute inset-0 z-0 bg-gradient-to-br from-white/20 to-white/5 opacity-0 transition-opacity group-hover:opacity-100"></span>
-						</button>
+						<Button variant="ghost">Sign in</Button>
 					</div>
 					<Button>Try free</Button>
 					<button className="ml-2 block scale-100 text-3xl text-white/90 transition-all hover:scale-105 hover:text-white active:scale-95 md:hidden">
