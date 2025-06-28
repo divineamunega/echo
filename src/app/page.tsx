@@ -1,11 +1,12 @@
 import Aurora from "@/blocks/Backgrounds/Aurora/Aurora";
 import Navbar from "@/components/shared/navbar";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
 	return (
-		<div className="w-screen">
+		<div>
 			<Navbar />
-			<div className="w-screen h-screen fixed top-0 -z-10">
+			<div className="h-screen w-screen fixed top-0 -z-10">
 				<Aurora
 					colorStops={["#3A29FF", "#FF94B4", "#FF3232"]}
 					blend={0.5}
@@ -14,7 +15,7 @@ export default function Home() {
 				/>
 			</div>
 
-			<div className="text-center  max-w-7xl py-24  mx-auto">
+			<div className="text-center  max-w-6xl py-32  mx-auto space-y-8">
 				<div className="space-y-4">
 					<h1 className="text-7xl font-black">
 						Build, Write, and Publish — Anywhere.
@@ -26,7 +27,12 @@ export default function Home() {
 						</p>
 					</div>
 				</div>
-				<div></div>
+				<div className="space-x-4">
+					<Button size="lg">Get Started</Button>
+					<Button size="lg" variant="ghost">
+						See How it Works
+					</Button>
+				</div>
 			</div>
 		</div>
 	);
