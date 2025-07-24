@@ -37,6 +37,9 @@ const Navbar = function () {
 						<Link href="blog">Blog</Link>
 					</Button>
 					<Button variant="ghost">
+						<Link href="/about">About</Link>
+					</Button>
+					<Button variant="ghost">
 						<Link href="/dashboard">Dashboard</Link>
 					</Button>
 				</div>
