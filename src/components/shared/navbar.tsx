@@ -1,107 +1,104 @@
+"use client";
+
 import { Button } from "../ui/button";
 import Link from "next/link";
+import { useState, useEffect } from "react";
+import { Menu, X, Moon, Sun } from "lucide-react";
+import { useTheme } from "next-themes";
 
 const Navbar = function () {
+	const [isMenuOpen, setIsMenuOpen] = useState(false);
+	const [scrolled, setScrolled] = useState(false);
+	const { theme, setTheme } = useTheme();
+
+	useEffect(() => {
+		const handleScroll = () => {
+			setScrolled(window.scrollY > 20);
+		};
+		window.addEventListener("scroll", handleScroll);
+		return () => window.removeEventListener("scroll", handleScroll);
+	}, []);
+
 	return (
-		<nav
-			// style="cursor: auto;"
-			className="glass-nav sticky left-0 right-0 top-0 z-10 mx-auto max-w-6xl overflow-hidden border-[1px] border-white/10 bg-gradient-to-br from-white/20 to-white/5 backdrop-blur md:left-6 md:right-6 md:top-6 md:rounded-2xl"
-		>
-			<div className="glass-nav flex items-center justify-between px-5 py-5">
-				{/* todo check this out later */}
-				{/* <span
-					className="pointer-events-none absolute z-0 grid h-[50px] w-[50px] origin-[0px_0px] place-content-center rounded-full bg-gradient-to-br from-indigo-600 from-40% to-indigo-400 text-2xl"
-					// style="opacity: 0; transform: scale(0) translateX(-50%) translateY(-50%); top: 53px; left: 364px;"
-				>
-					<svg
-						stroke="currentColor"
-						fill="none"
-						strokeWidth="2"
-						viewBox="0 0 24 24"
-						strokeLinecap="round"
-						strokeLinejoin="round"
-						className="text-white"
-						height="1em"
-						width="1em"
-						xmlns="http://www.w3.org/2000/svg"
-					>
-						<line x1="7" y1="17" x2="17" y2="7"></line>
-						<polyline points="7 7 17 7 17 17"></polyline>
-					</svg>
-				</span> */}
-				<div className="hidden items-center gap-2 md:flex">
-					<Button variant="ghost">
-						<Link href="/">Features </Link>
-					</Button>
-					<Button variant="ghost">
-						<Link href="blog">Blog</Link>
-					</Button>
-					<Button variant="ghost">
-						<Link href="/about">About</Link>
-					</Button>
-					<Button variant="ghost">
-						<Link href="/dashboard">Dashboard</Link>
-					</Button>
-				</div>
-				<span className="pointer-events-none relative left-0 top-[50%] z-10 text-4xl font-black text-white mix-blend-overlay md:absolute md:left-[50%] md:-translate-x-[50%] md:-translate-y-[50%]">
-					echo
-				</span>
-				<div className="flex items-center gap-4">
-					<div className="hidden md:block">
-						<Button variant="ghost">Sign in</Button>
-					</div>
-					<Button>Try free</Button>
-					<button className="ml-2 block scale-100 text-3xl text-white/90 transition-all hover:scale-105 hover:text-white active:scale-95 md:hidden">
-						<svg
-							stroke="currentColor"
-							fill="none"
-							strokeWidth="2"
-							viewBox="0 0 24 24"
-							strokeLinecap="round"
-							strokeLinejoin="round"
-							height="1em"
-							width="1em"
-							xmlns="http://www.w3.org/2000/svg"
-						>
-							<line x1="3" y1="12" x2="21" y2="12"></line>
-							<line x1="3" y1="6" x2="21" y2="6"></line>
-							<line x1="3" y1="18" x2="21" y2="18"></line>
-						</svg>
-					</button>
-				</div>
-			</div>
+		<nav className="fixed top-0 left-0 right-0 z-50 px-4 pt-4">
 			<div
-				className="block overflow-hidden md:hidden"
-				// style="height: 0px;"
+				className={`max-w-7xl mx-auto transition-all duration-300 ${
+					scrolled
+						? "bg-white/70 dark:bg-[oklch(0.13_0.02_265)]/80"
+						: "bg-white/50 dark:bg-[oklch(0.13_0.02_265)]/50"
+				} backdrop-blur-xl border border-neutral-200/50 dark:border-[oklch(0.25_0.03_265)]/50 rounded-2xl`}
 			>
-				<div className="flex items-center justify-between px-4 pb-4">
-					<div className="flex items-center gap-4">
-						<a
-							href="#"
-							className="text-white/90 transition-colors hover:text-white"
+				<div className="px-6 py-3 flex items-center justify-between">
+					<Link href="/" className="text-xl font-bold text-neutral-900 dark:text-neutral-50">
+						echo
+					</Link>
+
+					<div className="hidden md:flex items-center gap-6">
+						<Link
+							href="#pricing"
+							className="text-sm font-medium text-neutral-700 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-50 transition-colors"
 						>
-							Products
-						</a>
-						<a
-							href="#"
-							className="text-white/90 transition-colors hover:text-white"
+							Pricing
+						</Link>
+						<Link
+							href="/docs"
+							className="text-sm font-medium text-neutral-700 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-50 transition-colors"
 						>
-							History
-						</a>
-						<a
-							href="#"
-							className="text-white/90 transition-colors hover:text-white"
+							Docs
+						</Link>
+						<button
+							onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+							className="p-2 rounded-lg hover:bg-neutral-200/50 dark:hover:bg-[oklch(0.13_0.012_265)] dark:text-[oklch(0.75_0.008_265)] transition-colors"
+							aria-label="Toggle theme"
 						>
-							Contact
-						</a>
+							{theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+						</button>
+						<Button size="sm" className="bg-neutral-900 hover:bg-neutral-800 dark:bg-neutral-50 dark:hover:bg-neutral-200 text-white dark:text-neutral-900 transition-colors" asChild>
+							<Link href="/signup">Sign up</Link>
+						</Button>
 					</div>
-					<button className="group relative scale-100 overflow-hidden rounded-lg px-4 py-2 transition-transform hover:scale-105 active:scale-95">
-						<span className="relative z-10 text-white/90 transition-colors group-hover:text-white">
-							Sign in
-						</span>
-						<span className="absolute inset-0 z-0 bg-gradient-to-br from-white/20 to-white/5 opacity-0 transition-opacity group-hover:opacity-100"></span>
+
+					<button
+						onClick={() => setIsMenuOpen(!isMenuOpen)}
+						className="md:hidden p-2 rounded-lg hover:bg-neutral-200/50 dark:hover:bg-neutral-800/50 transition-colors"
+						aria-label="Toggle menu"
+					>
+						{isMenuOpen ? <X size={24} /> : <Menu size={24} />}
 					</button>
 				</div>
+
+				{isMenuOpen && (
+					<div className="md:hidden border-t border-neutral-200/50 dark:border-[oklch(0.20_0.015_265)] backdrop-blur-xl rounded-b-2xl dark:bg-[oklch(0.11_0.012_265)]">
+						<div className="px-6 py-4 flex flex-col gap-4">
+							<Link
+								href="#pricing"
+								className="text-sm font-medium text-neutral-700 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-50 transition-colors"
+								onClick={() => setIsMenuOpen(false)}
+							>
+								Pricing
+							</Link>
+							<Link
+								href="/docs"
+								className="text-sm font-medium text-neutral-700 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-50 transition-colors"
+								onClick={() => setIsMenuOpen(false)}
+							>
+								Docs
+							</Link>
+							<button
+								onClick={() => {
+									setTheme(theme === "dark" ? "light" : "dark");
+									setIsMenuOpen(false);
+								}}
+								className="text-sm font-medium text-neutral-700 dark:text-neutral-400 text-left hover:text-neutral-900 dark:hover:text-neutral-50 transition-colors"
+							>
+								{theme === "dark" ? "Light mode" : "Dark mode"}
+							</button>
+							<Button size="sm" className="bg-neutral-900 hover:bg-neutral-800 dark:bg-neutral-50 dark:hover:bg-neutral-200 text-white dark:text-neutral-900" asChild>
+								<Link href="/signup">Sign up</Link>
+							</Button>
+						</div>
+					</div>
+				)}
 			</div>
 		</nav>
 	);

@@ -1,83 +1,262 @@
-import Aurora from "@/blocks/Backgrounds/Aurora/Aurora";
-import SpotlightCard from "@/blocks/Components/SpotlightCard/SpotlightCard";
+"use client";
+
 import Navbar from "@/components/shared/navbar";
+import Footer from "@/components/shared/footer";
+import PlatformShowcase from "@/components/blocks/card-stack";
+import SmoothScroll from "@/components/shared/smooth-scroll";
 import { Button } from "@/components/ui/button";
-import { CloudCheck, Code2, TimerIcon } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
+import { motion } from "motion/react";
 
 export default function Home() {
 	return (
-		<div>
+		<div className="relative bg-white dark:bg-[oklch(0.06_0.005_265)] text-neutral-900 dark:text-neutral-50">
+			<SmoothScroll />
 			<Navbar />
-			<div className="h-screen w-screen fixed top-0 -z-10">
-				<Aurora
-					colorStops={["#3A29FF", "#FF94B4", "#FF3232"]}
-					blend={0.5}
-					amplitude={1.0}
-					speed={0.5}
-				/>
-			</div>
 
-			<section className="text-center  max-w-6xl py-32  mx-auto space-y-8">
-				<div className="space-y-4">
-					<h1 className="text-7xl font-black">
-						Build, Write, and Publish — Anywhere.
-					</h1>
-					<div className="max-w-4xl mx-auto">
-						<p className="text-2xl font-bold">
-							A markdown-powered blog platform that lets you write once and
-							publish everywhere.
-						</p>
+			{/* Hero Section */}
+			<section className="relative overflow-hidden px-8 pt-40 pb-32 md:pt-48 md:pb-40">
+				<div className="relative mx-auto max-w-7xl">
+					<div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+						<motion.div
+							initial={{ opacity: 0, y: 20 }}
+							animate={{ opacity: 1, y: 0 }}
+							transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+						>
+							<h1 className="text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-[1.1] mb-8">
+								Write once.
+								<br />
+								Publish <span className="text-neutral-400 dark:text-neutral-600">everywhere</span>.
+							</h1>
+							<p className="text-xl md:text-2xl text-neutral-600 dark:text-neutral-400 leading-relaxed mb-12 max-w-xl">
+								Cross-post your content to Hashnode, Dev.to, and Medium with a single click.
+							</p>
+							<motion.div
+								initial={{ opacity: 0, y: 10 }}
+								animate={{ opacity: 1, y: 0 }}
+								transition={{ duration: 0.5, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+							>
+								<Button 
+									size="lg" 
+									className="bg-neutral-900 hover:bg-neutral-800 dark:bg-neutral-50 dark:hover:bg-neutral-200 text-white dark:text-neutral-900 px-8 h-14 text-base font-medium transition-colors" 
+									asChild
+								>
+									<Link href="/signup">
+										Start publishing <ArrowRight className="ml-2" size={18} />
+									</Link>
+								</Button>
+							</motion.div>
+						</motion.div>
+						
+						<motion.div
+							initial={{ opacity: 0, x: 20 }}
+							animate={{ opacity: 1, x: 0 }}
+							transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+							className="flex justify-center lg:justify-end"
+						>
+							<PlatformShowcase />
+						</motion.div>
 					</div>
 				</div>
-				<div className="space-x-4">
-					<Button size="lg">Get Started</Button>
-					<Button size="lg" variant="ghost">
-						See How it Works
-					</Button>
+			</section>
+
+			{/* What is Echo */}
+			<section className="relative px-8 py-32 border-t border-neutral-200 dark:border-neutral-800">
+				<div className="mx-auto max-w-4xl">
+					<p className="text-2xl md:text-3xl text-neutral-600 dark:text-neutral-400 leading-relaxed">
+						Echo is a publishing platform for developers. Write your content once in markdown, 
+						and we'll distribute it across multiple platforms automatically.
+					</p>
+					<div className="grid md:grid-cols-3 gap-16 mt-24">
+						<div>
+							<div className="text-sm font-medium text-neutral-400 dark:text-neutral-600 mb-3">01</div>
+							<h3 className="text-xl font-semibold mb-3">Write</h3>
+							<p className="text-neutral-600 dark:text-neutral-400 leading-relaxed">
+								Markdown editor with live preview
+							</p>
+						</div>
+						<div>
+							<div className="text-sm font-medium text-neutral-400 dark:text-neutral-600 mb-3">02</div>
+							<h3 className="text-xl font-semibold mb-3">Connect</h3>
+							<p className="text-neutral-600 dark:text-neutral-400 leading-relaxed">
+								Link platform accounts via OAuth
+							</p>
+						</div>
+						<div>
+							<div className="text-sm font-medium text-neutral-400 dark:text-neutral-600 mb-3">03</div>
+							<h3 className="text-xl font-semibold mb-3">Publish</h3>
+							<p className="text-neutral-600 dark:text-neutral-400 leading-relaxed">
+								One click distributes everywhere
+							</p>
+						</div>
+					</div>
 				</div>
 			</section>
 
-			<section className="lg:px-20">
-				{/* Todo */}
-				<h2 className="text-center text-5xl font-bold">Features</h2>
+			{/* Features */}
+			<section className="relative px-8 py-32 border-t border-neutral-200 dark:border-neutral-800">
+				<div className="relative mx-auto max-w-6xl">
+					<h2 className="text-4xl md:text-5xl font-bold mb-20">
+						Everything you need
+					</h2>
+					<div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16">
+						<div>
+							<h3 className="text-lg font-semibold mb-2">Markdown first</h3>
+							<p className="text-neutral-600 dark:text-neutral-400 leading-relaxed">
+								Write in plain markdown. Live preview. Export anytime.
+							</p>
+						</div>
+						<div>
+							<h3 className="text-lg font-semibold mb-2">Smart scheduling</h3>
+							<p className="text-neutral-600 dark:text-neutral-400 leading-relaxed">
+								Queue your posts and publish at optimal times.
+							</p>
+						</div>
+						<div>
+							<h3 className="text-lg font-semibold mb-2">Analytics</h3>
+							<p className="text-neutral-600 dark:text-neutral-400 leading-relaxed">
+								Track performance across all platforms in one dashboard.
+							</p>
+						</div>
+						<div>
+							<h3 className="text-lg font-semibold mb-2">Version history</h3>
+							<p className="text-neutral-600 dark:text-neutral-400 leading-relaxed">
+								Every edit saved. Roll back to any version with one click.
+							</p>
+						</div>
+						<div>
+							<h3 className="text-lg font-semibold mb-2">Developer API</h3>
+							<p className="text-neutral-600 dark:text-neutral-400 leading-relaxed">
+								REST API for automation and custom integrations.
+							</p>
+						</div>
+						<div>
+							<h3 className="text-lg font-semibold mb-2">Cross-platform</h3>
+							<p className="text-neutral-600 dark:text-neutral-400 leading-relaxed">
+								Publish to Hashnode, Dev.to, and Medium simultaneously.
+							</p>
+						</div>
+					</div>
+				</div>
+			</section>
 
-				<div className="grid grid-cols-3 gap-10 py-24">
-					<SpotlightCard className="hover:scale-105 duration-500">
-						<div className="flex items-center justify-center flex-col gap-3">
-							<div className="p-5 rounded-full bg-[#3b29ff25]">
-								<CloudCheck size={50} />
-							</div>
-							<h3 className="text-3xl font-bold">Multi-PlatformSync</h3>
-							<p className="text-center">
-								Publish and update across Hashnode, Dev.to, Medium
-							</p>
+			{/* Pricing */}
+			<section className="relative px-8 py-32 border-t border-neutral-200 dark:border-neutral-800">
+				<div className="mx-auto max-w-6xl">
+					<h2 className="text-4xl md:text-5xl font-bold mb-4">Pricing</h2>
+					<p className="text-xl text-neutral-600 dark:text-neutral-400 mb-20">
+						Simple pricing. No hidden fees.
+					</p>
+					<div className="grid md:grid-cols-3 gap-8">
+						<div className="border border-neutral-200 dark:border-neutral-800 rounded-2xl p-8 hover:border-neutral-300 dark:hover:border-neutral-700 transition-colors">
+							<div className="text-sm font-medium text-neutral-500 dark:text-neutral-400 mb-2">Free</div>
+							<div className="text-5xl font-bold mb-8">$0</div>
+							<ul className="space-y-4 mb-10">
+								<li className="text-neutral-600 dark:text-neutral-400">10 posts per month</li>
+								<li className="text-neutral-600 dark:text-neutral-400">2 platforms</li>
+								<li className="text-neutral-600 dark:text-neutral-400">Basic analytics</li>
+							</ul>
+							<Button variant="outline" className="w-full h-12" asChild>
+								<Link href="/signup">Get started</Link>
+							</Button>
 						</div>
-					</SpotlightCard>
-					<SpotlightCard className="hover:scale-105 duration-500">
-						<div className="flex items-center justify-center flex-col gap-3 text-center">
-							<div className="p-5 rounded-full bg-[#ff323228]">
-								<TimerIcon size={50} />
-							</div>
-							<h3 className="text-3xl font-bold">Post Anywhere Anytime</h3>
-							<p>
-								Schedule your post and we’ll publish it for you — no need to be
-								online.
-							</p>
+
+						<div className="border-2 border-neutral-900 dark:border-neutral-50 rounded-2xl p-8 relative">
+							<div className="text-sm font-medium text-neutral-500 dark:text-neutral-400 mb-2">Pro</div>
+							<div className="text-5xl font-bold mb-8">$12</div>
+							<ul className="space-y-4 mb-10">
+								<li className="text-neutral-600 dark:text-neutral-400">Unlimited posts</li>
+								<li className="text-neutral-600 dark:text-neutral-400">All platforms</li>
+								<li className="text-neutral-600 dark:text-neutral-400">Advanced analytics</li>
+								<li className="text-neutral-600 dark:text-neutral-400">Smart scheduling</li>
+								<li className="text-neutral-600 dark:text-neutral-400">API access</li>
+							</ul>
+							<Button className="w-full h-12 bg-neutral-900 hover:bg-neutral-800 dark:bg-neutral-50 dark:hover:bg-neutral-200 text-white dark:text-neutral-900" asChild>
+								<Link href="/signup">Get started</Link>
+							</Button>
 						</div>
-					</SpotlightCard>
-					<SpotlightCard className="hover:scale-105 duration-500">
-						<div className="flex items-center justify-center flex-col gap-3 text-center">
-							<div className="p-5 rounded-full bg-[#ff94b427]">
-								<Code2 size={50} />
-							</div>
-							<h3 className="text-3xl font-bold text-center">
-								Public Post Feed
+
+						<div className="border border-neutral-200 dark:border-neutral-800 rounded-2xl p-8 hover:border-neutral-300 dark:hover:border-neutral-700 transition-colors">
+							<div className="text-sm font-medium text-neutral-500 dark:text-neutral-400 mb-2">Team</div>
+							<div className="text-5xl font-bold mb-8">$39</div>
+							<ul className="space-y-4 mb-10">
+								<li className="text-neutral-600 dark:text-neutral-400">Everything in Pro</li>
+								<li className="text-neutral-600 dark:text-neutral-400">5 team members</li>
+								<li className="text-neutral-600 dark:text-neutral-400">Shared workspaces</li>
+								<li className="text-neutral-600 dark:text-neutral-400">Priority support</li>
+							</ul>
+							<Button variant="outline" className="w-full h-12" asChild>
+								<Link href="/signup">Get started</Link>
+							</Button>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			{/* FAQ */}
+			<section className="relative px-8 py-32 border-t border-neutral-200 dark:border-neutral-800">
+				<div className="mx-auto max-w-4xl">
+					<h2 className="text-4xl md:text-5xl font-bold mb-16">Questions</h2>
+					<div className="space-y-12">
+						<div>
+							<h3 className="text-xl font-semibold mb-3">
+								How does Echo connect to my accounts?
 							</h3>
-							<p>Expose your blog posts to other platforms with an API</p>
+							<p className="text-neutral-600 dark:text-neutral-400 leading-relaxed">
+								We use OAuth for secure authentication. You grant Echo permission to
+								publish on your behalf. You can revoke access anytime.
+							</p>
 						</div>
-					</SpotlightCard>
+						<div>
+							<h3 className="text-xl font-semibold mb-3">
+								Can I edit published posts?
+							</h3>
+							<p className="text-neutral-600 dark:text-neutral-400 leading-relaxed">
+								Yes. Edit in Echo and we sync changes across all platforms. Version
+								history keeps track of everything.
+							</p>
+						</div>
+						<div>
+							<h3 className="text-xl font-semibold mb-3">
+								What if I want to cancel?
+							</h3>
+							<p className="text-neutral-600 dark:text-neutral-400 leading-relaxed">
+								Cancel anytime. Your posts remain published, and you can export
+								everything as markdown.
+							</p>
+						</div>
+						<div>
+							<h3 className="text-xl font-semibold mb-3">
+								Do you support other platforms?
+							</h3>
+							<p className="text-neutral-600 dark:text-neutral-400 leading-relaxed">
+								Currently Hashnode, Dev.to, and Medium. We're adding Ghost and
+								Substack based on user feedback.
+							</p>
+						</div>
+					</div>
 				</div>
 			</section>
+
+			{/* Final CTA */}
+			<section className="relative px-8 py-32 border-t border-neutral-200 dark:border-neutral-800">
+				<div className="relative mx-auto max-w-3xl text-center">
+					<h2 className="text-4xl md:text-5xl font-bold mb-8 leading-tight">
+						Ready to streamline your publishing?
+					</h2>
+					<Button size="lg" className="bg-neutral-900 hover:bg-neutral-800 dark:bg-neutral-50 dark:hover:bg-neutral-200 text-white dark:text-neutral-900 px-8 h-14 text-base font-medium" asChild>
+						<Link href="/signup">
+							Start free trial <ArrowRight className="ml-2" size={18} />
+						</Link>
+					</Button>
+					<p className="text-sm text-neutral-500 dark:text-neutral-500 mt-6">
+						14-day free trial · No credit card required
+					</p>
+				</div>
+			</section>
+
+			<Footer />
 		</div>
 	);
 }
